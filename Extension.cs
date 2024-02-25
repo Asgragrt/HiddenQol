@@ -1,4 +1,5 @@
 using Il2CppBmsPair = Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2Cpp.SpecialSongManager.HideBmsInfo>;
+using Object = UnityEngine.Object;
 
 namespace HiddenQol;
 
@@ -9,4 +10,6 @@ public static class Extension
         key = keyValuePair.Key;
         value = keyValuePair.Value;
     }
+
+    public static void Destroy(this Component component) => Object.Destroy(component);
 }

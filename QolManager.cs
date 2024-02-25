@@ -108,7 +108,6 @@ internal static class QoLManager
             }
         }
 
-
         Stage.OnTriggerHideBmsEvent();
         Stage.musicFancyScrollView.onItemIndexChange.Invoke(GlobalDataBase.dbMusicTag.curSelectedMusicIdx);
     }
@@ -127,11 +126,13 @@ internal static class QoLManager
         var background = QolToggle.transform.Find("Background").GetChild(0).GetComponent<Image>();
         var toggle = QolToggle.GetComponent<Toggle>();
         QolToggle.transform.position = new Vector3(-7f, -5f, 100f);
-        UnityEngine.Object.Destroy(QolToggle.GetComponent<OnToggle>());
-        UnityEngine.Object.Destroy(QolToggle.GetComponent<OnToggleOn>());
-        UnityEngine.Object.Destroy(QolToggle.GetComponent<OnActivate>());
-        UnityEngine.Object.Destroy(QolToggle.GetComponent<VariableBehaviour>());
-        UnityEngine.Object.Destroy(text.GetComponent<Localization>());
+
+        QolToggle.GetComponent<OnToggle>().Destroy();
+        QolToggle.GetComponent<OnToggleOn>().Destroy();
+        QolToggle.GetComponent<OnActivate>().Destroy();
+        QolToggle.GetComponent<VariableBehaviour>().Destroy();
+
+        text.GetComponent<Localization>().Destroy();
         toggle.group = null;
         toggle.SetIsOnWithoutNotify(Setting.QolEnabled);
         toggle.onValueChanged.AddListener((UnityAction<bool>)
