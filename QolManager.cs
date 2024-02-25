@@ -1,5 +1,6 @@
 using Il2CppAssets.Scripts.Database;
 using Il2CppAssets.Scripts.PeroTools.Commons;
+using Il2CppAssets.Scripts.PeroTools.GeneralLocalization;
 using Il2CppAssets.Scripts.PeroTools.Nice.Events;
 using Il2CppAssets.Scripts.PeroTools.Nice.Variables;
 using UnityEngine.Events;
@@ -126,10 +127,11 @@ internal static class QoLManager
         var background = QolToggle.transform.Find("Background").GetChild(0).GetComponent<Image>();
         var toggle = QolToggle.GetComponent<Toggle>();
         QolToggle.transform.position = new Vector3(-7f, -5f, 100f);
-        QolToggle.GetComponent<OnToggle>().enabled = false;
-        QolToggle.GetComponent<OnToggleOn>().enabled = false;
-        QolToggle.GetComponent<OnActivate>().enabled = false;
-        QolToggle.GetComponent<VariableBehaviour>().enabled = false;
+        UnityEngine.Object.Destroy(QolToggle.GetComponent<OnToggle>());
+        UnityEngine.Object.Destroy(QolToggle.GetComponent<OnToggleOn>());
+        UnityEngine.Object.Destroy(QolToggle.GetComponent<OnActivate>());
+        UnityEngine.Object.Destroy(QolToggle.GetComponent<VariableBehaviour>());
+        UnityEngine.Object.Destroy(text.GetComponent<Localization>());
         toggle.group = null;
         toggle.SetIsOnWithoutNotify(Setting.QolEnabled);
         toggle.onValueChanged.AddListener((UnityAction<bool>)
