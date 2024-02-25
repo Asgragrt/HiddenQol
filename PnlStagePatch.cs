@@ -15,22 +15,17 @@ internal static class PnlStagePatch
             ActivateAllHidden();
         }
 
-        GameObject vSelect = null;
-        foreach (var @object in __instance.transform.parent.parent.Find("Forward"))
-        {
-            var transform = @object.Cast<Transform>();
-            if (transform.name == "PnlVolume")
-            {
-                vSelect = transform.gameObject;
-            }
-        }
+        GameObject vSelect = __instance.transform.parent.parent.Find("Forward")?.Find("PnlVolume")?.gameObject;
 
         if (QolToggle != null || vSelect == null)
         {
             return;
         }
 
-        QolToggle = Object.Instantiate(vSelect.transform.Find("LogoSetting").Find("Toggles").Find("TglOn").gameObject, __instance.transform);
+        QolToggle = Object.Instantiate(
+            vSelect.transform.Find("LogoSetting").Find("Toggles").Find("TglOn").gameObject, 
+            __instance.stageAchievementPercent.transform
+            );
         SetupToggle();
     }
 }
