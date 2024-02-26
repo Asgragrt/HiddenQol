@@ -3,10 +3,12 @@ using Object = UnityEngine.Object;
 
 namespace HiddenQol;
 
-[HarmonyPatch(typeof(PnlStage), nameof(PnlStage.Awake))]
+[HarmonyPatch(typeof(PnlStage))]
 internal static class PnlStagePatch
 {
-    private static void Postfix(PnlStage __instance)
+    [HarmonyPatch(nameof(PnlStage.Awake))]
+    [HarmonyPostfix]
+    private static void AwakePostfix(PnlStage __instance)
     {
         Stage = __instance;
 
@@ -25,5 +27,17 @@ internal static class PnlStagePatch
         QolToggle = Object.Instantiate(vSelect.transform.Find("LogoSetting").Find("Toggles").Find("TglOn").gameObject,
             __instance.stageAchievementPercent.transform);
         SetupToggle();
+    }
+
+    [HarmonyPatch(nameof(PnlStage.OnEnable))]
+    [HarmonyPostfix]
+    private static void OnEnablePostfix()
+    {
+        if (!Setting.QolEnabled)
+        {
+            return;
+        }
+
+        ActivateAllHidden();
     }
 }
