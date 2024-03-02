@@ -6,8 +6,8 @@ namespace HiddenQol;
 [HarmonyPatch(typeof(PnlStage))]
 internal static class PnlStagePatch
 {
-    [HarmonyPostfix]
     [HarmonyPatch(nameof(PnlStage.Awake))]
+    [HarmonyPostfix]
     private static void AwakePostfix(PnlStage __instance)
     {
         Stage = __instance;
@@ -28,12 +28,15 @@ internal static class PnlStagePatch
             GameObject.Find("Info").transform);
         SetupToggle();
     }
-
-    [HarmonyPostfix]
+        
     [HarmonyPatch(nameof(PnlStage.OnEnable))]
+    [HarmonyPostfix]
     private static void OnEnablePostfix()
     {
-        if (!Setting.QolEnabled) return;
+        if (!Setting.QolEnabled)
+        {
+            return;
+        }
         DeactivateAllHidden();
         ActivateAllHidden();
     }
