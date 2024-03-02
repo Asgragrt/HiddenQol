@@ -23,7 +23,7 @@ internal static class PnlStagePatch
         }
 
         QolToggle = Object.Instantiate(vSelect.transform.Find("LogoSetting").Find("Toggles").Find("TglOn").gameObject,
-            __instance.stageAchievementPercent.transform);
+            GameObject.Find("Info").transform);
         SetupToggle();
     }
 }
