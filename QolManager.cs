@@ -90,7 +90,7 @@ internal static class QoLManager
         return (difficultyText, levelDesignerText);
     }
 
-    private static void DeactivateAllHidden()
+    internal static void DeactivateAllHidden()
     {
         var instance = Singleton<SpecialSongManager>.instance;
 
