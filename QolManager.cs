@@ -13,10 +13,16 @@ internal static class QoLManager
 {
     internal static PnlStage Stage { get; set; }
     internal static GameObject QolToggle { get; set; }
+    private static MusicInfo HiddenOuSong { get; set; }
+    private static MusicInfo BaseOuSong { get; set; }
 
     internal static void ActivateAllHidden()
     {
         var instance = Singleton<SpecialSongManager>.instance;
+
+        HiddenOuSong ??= GlobalDataBase.dbMusicTag.GetMusicInfoFromAll("0-53");
+        BaseOuSong ??= GlobalDataBase.dbMusicTag.GetMusicInfoFromAll("0-54");
+        GlobalDataBase.dbMusicTag.SetMusicInfo(BaseOuSong.uid, HiddenOuSong);
 
         instance.m_HideBmsInfos["4-5"] = new SpecialSongManager.HideBmsInfo("4-5", 2, 4, "goodtek_map4");
         instance.m_HideBmsInfos["8-3"] = new SpecialSongManager.HideBmsInfo("8-3", -1, 4, "sweet_witch_girl_map4");
@@ -99,6 +105,8 @@ internal static class QoLManager
         instance.m_HideBmsInfos["8-3"] = new SpecialSongManager.HideBmsInfo("8-3", -1, 4, "sweet_witch_girl_map4",
             new Func<bool>(() => instance.m_GameInTime is { Month: 11, Day: 1 }));
         instance.SetBarrageMode(false);
+
+        GlobalDataBase.dbMusicTag.SetMusicInfo(BaseOuSong.uid, BaseOuSong);
 
         foreach (var (_, value) in instance.m_HideBmsInfos)
         {
