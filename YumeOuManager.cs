@@ -28,25 +28,20 @@ namespace HiddenQol
 
         private static void RemoveFromCulling()
         {
-            if (!DBMusicTagDefine.s_CullingMusicUids.Contains("0-53")) return;
-
-            var newCullingArray = new Il2CppStringArray(DBMusicTagDefine.s_CullingMusicUids.Length - 1);
-            for (var i = 0; i < DBMusicTagDefine.s_CullingMusicUids.Length; i++)
-            {
-                if (DBMusicTagDefine.s_CullingMusicUids[i].Equals("0-53")) continue;
-                newCullingArray[i] = DBMusicTagDefine.s_CullingMusicUids[i];
-            }
-            DBMusicTagDefine.s_CullingMusicUids = newCullingArray;
+            var cullingArr = DBMusicTagDefine.s_CullingMusicUids;
+            DBMusicTagDefine.s_CullingMusicUids = cullingArr.Where(x => x != "0-53").ToArray();
         }
 
         private static void AddToCulling()
         {
             if (DBMusicTagDefine.s_CullingMusicUids.Contains("0-53")) return;
 
-            var newCullingArray = new Il2CppStringArray(DBMusicTagDefine.s_CullingMusicUids.Length + 1);
-            for (var i = 0; i < DBMusicTagDefine.s_CullingMusicUids.Length; i++)
+            var cullingArr = DBMusicTagDefine.s_CullingMusicUids;
+            var newCullingArray = new Il2CppStringArray(cullingArr.Length + 1);
+
+            for (var i = 0; i < cullingArr.Length; i++)
             {
-                newCullingArray[i] = DBMusicTagDefine.s_CullingMusicUids[i];
+                newCullingArray[i] = cullingArr[i];
             }
             newCullingArray[^1] = "0-53";
             DBMusicTagDefine.s_CullingMusicUids = newCullingArray;
