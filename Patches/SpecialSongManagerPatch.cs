@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Il2CppAssets.Scripts.Database;
 
-namespace HiddenQol;
+namespace HiddenQol.Patches;
 
 [HarmonyPatch(typeof(SpecialSongManager), nameof(SpecialSongManager.HideBmsCheck))]
 internal static class SpecialSongManagerPatch
