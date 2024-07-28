@@ -1,4 +1,4 @@
-using Il2CppAssets.Scripts.Database;
+﻿using Il2CppAssets.Scripts.Database;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppPeroPeroGames.GlobalDefines;
 
