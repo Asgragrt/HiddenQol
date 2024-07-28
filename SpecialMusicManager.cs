@@ -1,4 +1,4 @@
-﻿using Il2CppAssets.Scripts.Database;
+using Il2CppAssets.Scripts.Database;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppPeroPeroGames.GlobalDefines;
 
@@ -57,6 +57,10 @@ internal static class SpecialMusicManager
 
             BaseUid = BaseInfo.uid;
             HiddenUid = HiddenInfo.uid;
+
+            // * Set hidden cover to base to avoid empty covers :D
+            HiddenInfo.cover = BaseInfo.coverName;
+            musicTag.SetMusicInfo(HiddenInfo.uid, HiddenInfo);
         }
 
         internal MusicInfo BaseInfo { get; init; }
