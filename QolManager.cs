@@ -42,6 +42,9 @@ internal static class QoLManager
             }
         }
 
+        // * Activate hidden song alternatives
+        AlternativeSongManager.ActivateAlternatives();
+
         Stage.OnTriggerHideBmsEvent();
         Stage.musicFancyScrollView.onItemIndexChange.Invoke(
             GlobalDataBase.dbMusicTag.curSelectedMusicIdx
@@ -78,6 +81,9 @@ internal static class QoLManager
                 DeactivateHidden(value);
             }
         }
+
+        // * Deactivate hidden song alternatives
+        AlternativeSongManager.DeactivateAlternatives();
 
         Stage.OnTriggerHideBmsEvent();
         Stage.musicFancyScrollView.onItemIndexChange.Invoke(
