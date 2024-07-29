@@ -1,4 +1,5 @@
 using HarmonyLib;
+using HiddenQol.Managers;
 using Object = UnityEngine.Object;
 
 namespace HiddenQol.Patches;

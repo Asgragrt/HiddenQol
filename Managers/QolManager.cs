@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Text = UnityEngine.UI.Text;
 
-namespace HiddenQol;
+namespace HiddenQol.Managers;
 
 internal static class QoLManager
 {
@@ -111,7 +111,7 @@ internal static class QoLManager
         toggle.SetIsOnWithoutNotify(Setting.QolEnabled);
         toggle.onValueChanged.AddListener(
             (UnityAction<bool>)(
-                (bool val) =>
+                (val) =>
                 {
                     Setting.QolEnabled = val;
                     if (val)

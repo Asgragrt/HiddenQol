@@ -2,7 +2,7 @@
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppPeroPeroGames.GlobalDefines;
 
-namespace HiddenQol;
+namespace HiddenQol.Managers;
 
 internal static class SpecialMusicManager
 {

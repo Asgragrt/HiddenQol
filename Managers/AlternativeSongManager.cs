@@ -1,7 +1,7 @@
 ﻿using Il2CppAssets.Scripts.Database;
 using Il2CppAssets.Scripts.PeroTools.Commons;
 
-namespace HiddenQol;
+namespace HiddenQol.Managers;
 
 internal static class AlternativeSongManager
 {
