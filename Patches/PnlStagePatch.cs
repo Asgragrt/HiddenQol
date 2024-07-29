@@ -1,6 +1,4 @@
 using HarmonyLib;
-using Il2CppAssets.Scripts.Database;
-using Il2CppAssets.Scripts.PeroTools.Commons;
 using Object = UnityEngine.Object;
 
 namespace HiddenQol.Patches;
@@ -19,13 +17,6 @@ internal static class PnlStagePatch
         {
             ActivateAllHidden();
         }
-
-        Stage.musicFancyScrollView.onItemIndexChange += new Action<int>(_ =>
-        {
-            var uid = GlobalDataBase.s_DbMusicTag.CurMusicInfo().uid;
-            bool isInvoke = Singleton<SpecialSongManager>.instance.IsInvokeHideBms(uid);
-            Melon<Main>.Logger.Msg($"{uid} - {isInvoke}");
-        });
 
         var vSelect = __instance
             .transform.parent.parent.Find("Forward")
