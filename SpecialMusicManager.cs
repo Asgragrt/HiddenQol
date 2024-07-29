@@ -36,8 +36,8 @@ internal static class SpecialMusicManager
         [
             new SpecialMusic("0-54", "0-53"), // Yume Ou
             new SpecialMusic("0-56", "0-55"), // Echo over you
-            new SpecialMusic("33-4", "33-12"), // Chaos
-            new SpecialMusic("39-0", "39-8"), // Sea-Saw
+            new SpecialMusic("33-4", "33-12", replaceCover: true, replaceDemo: true), // Chaos
+            new SpecialMusic("39-0", "39-8", replaceCover: true), // Sea-Saw
         ];
     }
 
@@ -50,7 +50,12 @@ internal static class SpecialMusicManager
     {
         private static readonly DBMusicTag musicTag = GlobalDataBase.dbMusicTag;
 
-        internal SpecialMusic(string baseUid, string hiddenUid)
+        internal SpecialMusic(
+            string baseUid,
+            string hiddenUid,
+            bool replaceCover = false,
+            bool replaceDemo = false
+        )
         {
             BaseInfo = musicTag.GetMusicInfoFromAll(baseUid);
             HiddenInfo = musicTag.GetMusicInfoFromAll(hiddenUid);
@@ -59,8 +64,18 @@ internal static class SpecialMusicManager
             HiddenUid = HiddenInfo.uid;
 
             // * Set hidden cover to base to avoid empty covers :D
-            HiddenInfo.cover = BaseInfo.coverName;
-            musicTag.SetMusicInfo(HiddenInfo.uid, HiddenInfo);
+            if (replaceCover)
+            {
+                HiddenInfo.cover = BaseInfo.coverName;
+                musicTag.SetMusicInfo(HiddenUid, HiddenInfo);
+            }
+
+            // * Replace demo song if not available
+            if (replaceDemo)
+            {
+                HiddenInfo.demo = BaseInfo.demo;
+                musicTag.SetMusicInfo(HiddenUid, HiddenInfo);
+            }
         }
 
         internal MusicInfo BaseInfo { get; init; }
