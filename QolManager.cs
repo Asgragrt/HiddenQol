@@ -53,7 +53,7 @@ internal static class QoLManager
     {
         var instance = Singleton<SpecialSongManager>.instance;
 
-        SpecialMusicManager.DisableSpecials();
+        SpecialMusicManager.DeactivateSpecials();
 
         instance.m_HideBmsInfos["4-5"] = new SpecialSongManager.HideBmsInfo(
             "4-5",

@@ -17,11 +17,11 @@ internal static class SpecialMusicManager
         }
     }
 
-    internal static void DisableSpecials()
+    internal static void DeactivateSpecials()
     {
         foreach (var specialMusic in SpecialMusics)
         {
-            specialMusic.Disable();
+            specialMusic.Deactivate();
         }
     }
 
@@ -74,7 +74,7 @@ internal static class SpecialMusicManager
             SetBaseAsHidden(true);
         }
 
-        internal void Disable()
+        internal void Deactivate()
         {
             CullingAdd(HiddenUid);
             SetBaseAsHidden(false);
