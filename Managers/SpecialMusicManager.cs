@@ -30,6 +30,11 @@ internal static class SpecialMusicManager
         if (IsInitialized)
             return;
 
+        foreach (var uid in DBMusicTagDefine.s_CullingMusicUids)
+        {
+            Melon<Main>.Logger.Msg(uid);
+        }
+
         IsInitialized = true;
 
         SpecialMusics =
@@ -38,6 +43,7 @@ internal static class SpecialMusicManager
             new SpecialMusic("0-56", "0-55"), // Echo over you
             new SpecialMusic("33-4", "33-12", replaceCover: true, replaceDemo: true), // Chaos
             new SpecialMusic("39-0", "39-8", replaceCover: true), // Sea-Saw
+            new SpecialMusic("0-58", "0-57"), // Heart Message
         ];
     }
 
@@ -48,6 +54,11 @@ internal static class SpecialMusicManager
 
     internal class SpecialMusic
     {
+        internal MusicInfo BaseInfo { get; init; }
+        internal string BaseUid { get; init; }
+        internal MusicInfo HiddenInfo { get; init; }
+        internal string HiddenUid { get; init; }
+
         private static readonly DBMusicTag musicTag = GlobalDataBase.dbMusicTag;
 
         internal SpecialMusic(
@@ -77,11 +88,6 @@ internal static class SpecialMusicManager
                 musicTag.SetMusicInfo(HiddenUid, HiddenInfo);
             }
         }
-
-        internal MusicInfo BaseInfo { get; init; }
-        internal string BaseUid { get; init; }
-        internal MusicInfo HiddenInfo { get; init; }
-        internal string HiddenUid { get; init; }
 
         internal void Activate()
         {
