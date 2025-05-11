@@ -19,20 +19,17 @@ internal static class PnlStagePatch
             ActivateAllHidden();
         }
 
-        var vSelect = __instance
-            .transform.parent.parent.Find("Forward")
-            ?.Find("PnlVolume")
+        var originalTgl = GameObject
+            .Find("UI/Forward/PnlVolume/VoiceSetContent/LogoSetting/Toggles/TglOn")
             ?.gameObject;
 
-        if (QolToggle != null || vSelect == null)
+        if (QolToggle is not null || originalTgl is null)
         {
             return;
         }
 
-        QolToggle = Object.Instantiate(
-            vSelect.transform.Find("LogoSetting").Find("Toggles").Find("TglOn").gameObject,
-            GameObject.Find("Info").transform
-        );
+        var infoTransform = GameObject.Find("UI/Standerd/PnlStage/StageUi/Info").transform;
+        QolToggle = Object.Instantiate(originalTgl, infoTransform);
         SetupToggle();
     }
 
