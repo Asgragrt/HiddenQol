@@ -30,11 +30,6 @@ internal static class SpecialMusicManager
         if (IsInitialized)
             return;
 
-        foreach (var uid in DBMusicTagDefine.s_CullingMusicUids)
-        {
-            Melon<Main>.Logger.Msg(uid);
-        }
-
         IsInitialized = true;
 
         SpecialMusics =
