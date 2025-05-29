@@ -19,16 +19,24 @@ internal static class PnlStagePatch
             ActivateAllHidden();
         }
 
-        var originalTgl = GameObject
-            .Find("UI/Forward/PnlVolume/VoiceSetContent/LogoSetting/Toggles/TglOn")
-            ?.gameObject;
-
-        if (QolToggle is not null || originalTgl is null)
+        if (QolToggle != null)
         {
             return;
         }
 
-        var infoTransform = GameObject.Find("UI/Standerd/PnlStage/StageUi/Info").transform;
+        var infoTransform = GameObject.Find("UI/Standerd/PnlStage/StageUi/Info/Bottom").transform;
+        var originalTgl = GameObject
+            .Find("UI/Forward/PnlVolume/VoiceSetContent/LogoSetting/Toggles/TglOn")
+            ?.gameObject;
+
+        if (originalTgl == null || infoTransform == null)
+        {
+            Melon<Main>.Logger.Warning(
+                "Could not find the toggle game object or the parent transform."
+            );
+            return;
+        }
+
         QolToggle = Object.Instantiate(originalTgl, infoTransform);
         SetupToggle();
     }
