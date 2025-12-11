@@ -7,6 +7,19 @@ namespace HiddenQol.Patches;
 [HarmonyPatch(typeof(PnlStage))]
 internal static class PnlStagePatch
 {
+    private static readonly List<string> ToggleParents =
+    [
+        "UI/Standerd/PnlStage/StageUi/Info/Bottom",
+        "UI/Standerd/PnlStage/StageUi/Info"
+    ];
+
+    private static readonly List<string> TogglePaths =
+    [
+        "UI/Forward/PnlVolume/VoiceSetContent/LogoSetting/Toggles/TglOn",
+        "UI/Forward/PnlDisplaySettingPC/Setting/Vsync/Toggles/TglOn",
+        "UI/Forward/PnlPlaySetting/AreaAdvancedSetting/SettingElements/TglAdvancedJudge/TglsJudge/TglOn"
+    ];
+
     [HarmonyPatch(nameof(PnlStage.Awake))]
     [HarmonyPostfix]
     private static void AwakePostfix(PnlStage __instance)
@@ -34,9 +47,15 @@ internal static class PnlStagePatch
             return;
         }
 
-        var infoTransform = GameObject.Find("UI/Standerd/PnlStage/StageUi/Info/Bottom").transform;
-        var originalTgl = GameObject
-            .Find("UI/Forward/PnlVolume/VoiceSetContent/LogoSetting/Toggles/TglOn")
+        var infoTransform =
+            ToggleParents
+                .Select(path => GameObject.Find(path))
+                .FirstOrDefault(go => go != null)
+                ?.transform ?? __instance.stageAchievementPercent?.transform;
+
+        var originalTgl = TogglePaths
+            .Select(path => GameObject.Find(path))
+            .FirstOrDefault(go => go != null)
             ?.gameObject;
 
         if (originalTgl == null || infoTransform == null)
@@ -44,6 +63,7 @@ internal static class PnlStagePatch
             Melon<Main>.Logger.Warning(
                 "Could not find the toggle game object or the parent transform."
             );
+
             return;
         }
 
