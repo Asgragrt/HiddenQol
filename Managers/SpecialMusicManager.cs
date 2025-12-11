@@ -32,6 +32,11 @@ internal static class SpecialMusicManager
 
         IsInitialized = true;
 
+        // foreach (var uid in DBMusicTagDefine.s_CullingMusicUids)
+        // {
+        //     Melon<Main>.Logger.Msg(uid);
+        // }
+
         SpecialMusics =
         [
             new SpecialMusic("0-54", "0-53"), // Yume Ou

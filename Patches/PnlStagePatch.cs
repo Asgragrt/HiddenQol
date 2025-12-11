@@ -14,6 +14,16 @@ internal static class PnlStagePatch
         SpecialMusicManager.Init();
         Stage = __instance;
 
+        // if (true)
+        // {
+        //     __instance.musicFancyScrollView.onItemIndexChange += new Action<int>(i =>
+        //     {
+        //         Melon<Main>.Logger.Msg(
+        //             GlobalDataBase.dbMusicTag.GetMusicInfoFromShowMusicUids(i)?.uid
+        //         );
+        //     });
+        // }
+
         if (Setting.QolEnabled)
         {
             ActivateAllHidden();
